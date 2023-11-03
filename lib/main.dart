@@ -100,7 +100,9 @@ class _MyAppState extends State<MyApp> {
             final weather = weatherData[index];
             return Card(
               child: ListTile(
-                title: Text("City: ${weather.city}"),
+                title: Text("City: ${weather.city}", style: TextStyle(
+                  fontSize: 18,
+                ),),
                 subtitle: Text(
                   "Temperature: ${weather.temperature}°C\n"
                       "Condition: ${weather.condition}\n"
