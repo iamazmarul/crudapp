@@ -5,37 +5,6 @@ void main() {
   runApp(MyApp());
 }
 
-class Weather {
-  final String city;
-  final double temperature;
-  final String condition;
-  final int humidity;
-  final double windSpeed;
-
-  Weather({
-    required this.city,
-    required this.temperature,
-    required this.condition,
-    required this.humidity,
-    required this.windSpeed,
-  });
-
-  factory Weather.fromJson(Map<String, dynamic> json) {
-    return Weather(
-      city: json['city'],
-      temperature: json['temperature'].toDouble(),
-      condition: json['condition'],
-      humidity: json['humidity'],
-      windSpeed: json['windSpeed'].toDouble(),
-    );
-  }
-}
-
-class MyApp extends StatefulWidget {
-  @override
-  _MyAppState createState() => _MyAppState();
-}
-
 class _MyAppState extends State<MyApp> {
   List<Weather> weatherData = [];
 
@@ -107,7 +76,9 @@ class _MyAppState extends State<MyApp> {
                   "Temperature: ${weather.temperature}°C\n"
                       "Condition: ${weather.condition}\n"
                       "Humidity: ${weather.humidity}%\n"
-                      "Wind Speed: ${weather.windSpeed} km/h",
+                      "Wind Speed: ${weather.windSpeed} km/h",style: TextStyle(
+                  fontSize: 16,
+                ),
                 ),
               ),
             );
@@ -116,4 +87,35 @@ class _MyAppState extends State<MyApp> {
       ),
     );
   }
+}
+
+class Weather {
+  final String city;
+  final double temperature;
+  final String condition;
+  final int humidity;
+  final double windSpeed;
+
+  Weather({
+    required this.city,
+    required this.temperature,
+    required this.condition,
+    required this.humidity,
+    required this.windSpeed,
+  });
+
+  factory Weather.fromJson(Map<String, dynamic> json) {
+    return Weather(
+      city: json['city'],
+      temperature: json['temperature'].toDouble(),
+      condition: json['condition'],
+      humidity: json['humidity'],
+      windSpeed: json['windSpeed'].toDouble(),
+    );
+  }
+}
+
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
 }
