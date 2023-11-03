@@ -12,7 +12,6 @@ class PhotoListScreen extends StatefulWidget {
 }
 
 class _PhotoListScreenState extends State<PhotoListScreen> {
-
   List<Photo> photos = [];
   bool isLoading = true;
   String error = '';
@@ -24,11 +23,14 @@ class _PhotoListScreenState extends State<PhotoListScreen> {
   }
 
   void fetchPhotos() async {
-    final response = await http.get(Uri.parse('https://jsonplaceholder.typicode.com/photos'));
+    final response = await http
+        .get(Uri.parse('https://jsonplaceholder.typicode.com/photos'));
 
     if (response.statusCode == 200) {
       setState(() {
-        photos = (json.decode(response.body) as List).map((data) => Photo.fromJson(data)).toList();
+        photos = (json.decode(response.body) as List)
+            .map((data) => Photo.fromJson(data))
+            .toList();
         isLoading = false;
       });
     } else {
@@ -48,27 +50,28 @@ class _PhotoListScreenState extends State<PhotoListScreen> {
       body: isLoading
           ? const Center(child: CircularProgressIndicator())
           : error.isNotEmpty
-          ? Center(child: Text(error))
-          : ListView.builder(
-        itemCount: photos.length,
-        itemBuilder: (context, index) {
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ListTile(
-              title: Text(photos[index].title),
-              leading: Image.network(photos[index].thumbnailUrl),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => PhotoDetailScreen(photo: photos[index]),
-                  ),
-                );
-              },
-            ),
-          );
-        },
-      ),
+              ? Center(child: Text(error))
+              : ListView.builder(
+                  itemCount: photos.length,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ListTile(
+                        title: Text(photos[index].title),
+                        leading: Image.network(photos[index].thumbnailUrl),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  PhotoDetailScreen(photo: photos[index]),
+                            ),
+                          );
+                        },
+                      ),
+                    );
+                  },
+                ),
     );
   }
 }

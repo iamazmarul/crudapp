@@ -19,7 +19,9 @@ class PhotoDetailScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Image.network(photo.url),
-              const SizedBox(height: 15,),
+              const SizedBox(
+                height: 15,
+              ),
               Text('Title: ${photo.title}'),
               Text('ID: ${photo.id}'),
             ],
